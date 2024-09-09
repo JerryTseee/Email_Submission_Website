@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #5cc6cb;
+    }
+    .email-form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .email-input {
+        padding: 10px;
+        border-radius: 5px 0 0 5px;
+        transition: border-color 0.3s;
+    }
+    .submit-btn {
+        padding: 10px 20px;
+        color: #fff;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .valid {
+        border: 1px solid green;
+    }
+    .invalid {
+        border: 1px solid red;
+    }
+    .green {
+        background-color: green;
+    }
+    .gray {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+    .submitted-email {
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+<div class="email-form">
+    <input type="email" class="email-input" id="emailInput" placeholder="Enter your email">
+    <button class="submit-btn gray" id="submit-btn" disabled>Submit</button>
+    <div class="submitted-email" id="submittedEmail"></div>
+</div>
+
+<script>
+    const emailInput = document.getElementById('emailInput');
+    const submitBtn = document.getElementById('submit-btn');
+    const submittedEmail = document.getElementById('submittedEmail');
+
+    emailInput.addEventListener('input', function() {
+        if (emailInput.value.endsWith('@connect.hku.hk') || emailInput.value.endsWith('@hku.hk')) {
+            emailInput.classList.remove('invalid');
+            emailInput.classList.add('valid');
+            submitBtn.classList.remove('gray');
+            submitBtn.classList.add('green');
+            submitBtn.disabled = false;
+        } else {
+            emailInput.classList.remove('valid');
+            emailInput.classList.add('invalid');
+            submitBtn.classList.remove('green');
+            submitBtn.classList.add('gray');
+            submitBtn.disabled = true;
+        }
+    });
+
+    submitBtn.addEventListener('click', function() {
+        const email = emailInput.value;
+        alert("Email submitted: " + email);
+        const username = email.split('@')[0];
+        submittedEmail.textContent = `Submitted Email: ${username}`;
+    });
+</script>
+</body>
+</html>
