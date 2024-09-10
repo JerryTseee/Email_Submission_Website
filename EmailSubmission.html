@@ -64,7 +64,9 @@
     const submittedEmail = document.getElementById('submittedEmail');
 
     emailInput.addEventListener('input', function() {
-        if (emailInput.value.endsWith('@connect.hku.hk') || emailInput.value.endsWith('@hku.hk')) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (emailRegex.test(emailInput.value) && (emailInput.value.endsWith('@connect.hku.hk') || emailInput.value.endsWith('@hku.hk'))) {
             emailInput.classList.remove('invalid');
             emailInput.classList.add('valid');
             submitBtn.classList.remove('gray');
